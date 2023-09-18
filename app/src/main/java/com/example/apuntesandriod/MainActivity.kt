@@ -13,11 +13,23 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.apuntesandriod.ui.theme.ApuntesAndriodTheme
 
 class MainActivity : ComponentActivity() {
+    enum class Colors(val text: String, val number: Int, val color: Color){
+        Red("Rojo", 0, Color(255,0,0)),
+        Blue("Azul", 1, Color(0,255,0)),
+        Green("Verde", 2, Color(0,0,255));
+
+        fun WithAlpha(alpha: Float):Color{
+            return this.color.copy(alpha = alpha )
+        }
+    }
+
+    enum class Operations
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -25,29 +37,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     Column() {
-                        for(i in 1..5) {
-                            PrintOnScreen("null")
-                        }
-                        Spacer(modifier = Modifier.height(16.dp))
-                        val names = listOf ("Roc","Nazi","Jordi")
-
-                        for(name in names){
-                            PrintOnScreen(name)
-                        }
-                        Spacer(modifier = Modifier.height(16.dp))
-
-                        for(i in names){
-                            PrintOnScreen("index: " + i.toString())
-                        }
-
-                        Spacer(modifier = Modifier.height(16.dp))
-                        names.forEach{name ->
-                            PrintOnScreen(name)
-                        }
-                        Spacer(modifier = Modifier.height(16.dp))
-                        names.forEachIndexed() {index, name->
-                            PrintOnScreen(name + " " + index.toString())
-                        }
+                        PrintOnScreen(name = "Algo de color", color = Colors.Red)
                     }
                 }
             }
@@ -56,12 +46,13 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun PrintOnScreen(name: String, modifier: Modifier = Modifier) {
+fun PrintOnScreen(name: String, color: MainActivity.Colors, modifier: Modifier = Modifier) {
 
 
 
     Text(
         text = "Hello ${name.uppercase()}",
-        modifier = modifier
+        modifier = Modifier,
+        color = color.WithAlpha(0.5f)
     )
 }
