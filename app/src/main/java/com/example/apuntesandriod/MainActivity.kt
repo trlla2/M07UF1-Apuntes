@@ -29,7 +29,23 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    enum class Operations
+    enum class Operations(val operation: (Int, Int) -> Int){
+        Add({a,b -> a + b}),
+        Subtract({a,b -> a-b});
+    }
+
+    class Bt(){
+       var Listeners: MutableList<(Bt) -> Int> = mutableListOf()
+        fun AddOnClickListener(OnClickListener: (Bt)->Int){
+                Listeners.add(OnClickListener)
+        }
+        fun Click(){
+            for (listener in Listeners){
+                listener(this)
+            }
+
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -37,7 +53,13 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     Column() {
-                        PrintOnScreen(name = "Algo de color", color = Colors.Red)
+                        var mathFunction: Operations = Operations.Add
+                        var result = mathFunction.operation(1,5)
+
+                        PrintOnScreen(name = result.toString(), color = Colors.Red)
+                        val myButton = Bt()
+                        MyButton.AddOnClick
+
                     }
                 }
             }
