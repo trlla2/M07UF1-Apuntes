@@ -58,8 +58,13 @@ class MainActivity : ComponentActivity() {
 
                         PrintOnScreen(name = result.toString(), color = Colors.Red)
                         val myButton = Bt()
-                        MyButton.AddOnClick
 
+                        myButton.AddOnClickListener{bt ->
+                            Log.v("Click", "Boton Pulstado")
+
+                        }
+
+                        myButton.Click()
                     }
                 }
             }
