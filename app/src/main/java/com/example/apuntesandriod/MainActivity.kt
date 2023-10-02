@@ -19,33 +19,25 @@ import androidx.compose.ui.unit.dp
 import com.example.apuntesandriod.ui.theme.ApuntesAndriodTheme
 
 class MainActivity : ComponentActivity() {
-    enum class Colors(val text: String, val number: Int, val color: Color){
-        Red("Rojo", 0, Color(255,0,0)),
-        Blue("Azul", 1, Color(0,255,0)),
-        Green("Verde", 2, Color(0,0,255));
-
-        fun WithAlpha(alpha: Float):Color{
-            return this.color.copy(alpha = alpha )
-        }
+    enum class Animals(){
+        Dog,Cat,Panda,Fox
     }
 
-    enum class Operations(val operation: (Int, Int) -> Int){
-        Add({a,b -> a + b}),
-        Subtract({a,b -> a-b});
+    open class Fruit(val name:String = "FurtaGenerica"){
+
     }
 
-    class Bt(){
-       var Listeners: MutableList<(Bt) -> Int> = mutableListOf()
-        fun AddOnClickListener(OnClickListener: (Bt)->Int){
-                Listeners.add(OnClickListener)
-        }
-        fun Click(){
-            for (listener in Listeners){
-                listener(this)
-            }
+    class Apple(): Fruit("manzana"){
+        fun AppleFunc(){
 
         }
     }
+    class Banana(): Fruit("Banana"){
+        fun BananaFunc(){
+
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -53,18 +45,36 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     Column() {
-                        var mathFunction: Operations = Operations.Add
-                        var result = mathFunction.operation(1,5)
-
-                        PrintOnScreen(name = result.toString(), color = Colors.Red)
-                        val myButton = Bt()
-
-                        myButton.AddOnClickListener{bt ->
-                            Log.v("Click", "Boton Pulstado")
-
+                        val animal = Animals.Panda
+                        when(animal){
+                            Animals.Dog -> PrintOnScreen(name = "Es un Panda")
+                            Animals.Cat -> PrintOnScreen(name = "Es un gato")
+                            Animals.Panda -> PrintOnScreen(name = "Es un Panda")
+                            Animals.Fox -> PrintOnScreen(name = "Es un zorro")
                         }
+                        var fruit: Fruit = Apple()
 
-                        myButton.Click()
+                        when(fruit){
+
+                            is Banana -> {
+                                fruit.BananaFunc()
+                            }
+                            is Apple ->{
+                                fruit.AppleFunc()
+                            }
+                            else -> {
+
+                            }
+                        }
+                        val str = "Lunes"
+
+
+                        val numberDay = when(str){
+                            "lunes" -> 0
+                            "martes" -> 1
+                            "miercoles" -> 2
+                            else -> -1
+                        }
                     }
                 }
             }
@@ -73,13 +83,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun PrintOnScreen(name: String, color: MainActivity.Colors, modifier: Modifier = Modifier) {
+fun PrintOnScreen(name: String, modifier: Modifier = Modifier) {
 
 
 
     Text(
         text = "Hello ${name.uppercase()}",
-        modifier = Modifier,
-        color = color.WithAlpha(0.5f)
+
     )
 }
