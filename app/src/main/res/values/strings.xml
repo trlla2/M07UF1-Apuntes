@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">ApuntesAndriod</string>
+    <string name="app_name" translatable="false">ApuntesAndriod</string>
+    <string name="hellloWorld">Hello World</string>
 </resources>
