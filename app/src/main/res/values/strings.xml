@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name" translatable="false">ApuntesAndriod</string>
     <string name="hellloWorld">Hello World</string>
+    <string name="bt_change_screen">Click me to change the screen</string>
 </resources>
