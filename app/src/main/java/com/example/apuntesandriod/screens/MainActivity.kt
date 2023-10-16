@@ -3,6 +3,7 @@ package com.example.apuntesandriod.screens
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import com.example.apuntesandriod.R
 
@@ -14,11 +15,11 @@ class MainActivity : ComponentActivity() {
         setContentView(R.layout.start_screen)
 
         btChangeScreen.setOnClickListener{
-            val newIntent = Intent(this,SecondScreeen::class.java)
-            newIntent.putExtra(SecondScreeen.ExtraText, "ashashadfa suka Аутичный диджей kixabank")
+            val toast = Toast(this)
+            toast.duration = Toast.LENGTH_LONG
+            toast.setText("я люблю есть дети")
 
-            this.startActivity(newIntent)
-            overridePendingTransition(R.anim.enter_from_right,R.anim.exit_to_left)
+            toast.show()
         }
 
     }
