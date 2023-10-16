@@ -5,54 +5,30 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.compose.material3.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.apuntesandriod.Heroes.HeroAdapter
+import com.example.apuntesandriod.Heroes.HeroData
+import com.example.apuntesandriod.Heroes.HeroProvider
 import com.example.apuntesandriod.R
 
 class MainActivity : ComponentActivity() {
 
-    val btChangeScreen by lazy {findViewById<Button>(R.id.bt_changeScreen)}
+    val table by lazy { findViewById<RecyclerView>(R.id.my_recyclerView) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.start_screen)
 
-        btChangeScreen.setOnClickListener{
-            var builder = AlertDialog.Builder(this)
-            builder.setTitle("да здравствует Палестина")
-            //builder.setMessage("Никакого реконоско, Израиль, как законное государство")
+        table.layoutManager = LinearLayoutManager(this)
 
-            builder.setPositiveButton("Aceptar"){dialog, witch ->
-                dialog.dismiss()
-            }
-            builder.setOnCancelListener{
-                val toast = Toast(this)
-                toast.setText("отменить мой брак")
-                toast.show()
-            }
 
-            builder.setNegativeButton("наша свобода"){dialog,witch ->
-                dialog.dismiss()
-            }
-            builder.setNeutralButton("я люблю фембоев"){dialog,witch ->
-                dialog.dismiss()
-            }
 
-            val options = arrayOf("Respuesta 1","Respuesta 2","Respuesta 3","Respuesta 4")
-            val selectedResponses = booleanArrayOf(false,false,false,false)
-            /*
-            builder.setMultiChoiceItems(options,selectedResponses){dialog,witch,isChecked ->
-                selectedResponses[witch] = isChecked
-            }
-            */
-            /*val input = EditText(this)
-            input.hint = "опишите здесь хиджопута"
-            builder.setView(input)*/
+        table.adapter = HeroAdapter(HeroProvider.GetAllHeroes())
 
-            
-            val dialog = builder.create()
-            dialog.show()
-        }
 
     }
 }
