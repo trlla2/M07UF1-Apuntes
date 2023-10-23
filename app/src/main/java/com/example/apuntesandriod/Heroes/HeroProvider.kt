@@ -1,22 +1,9 @@
 package com.example.apuntesandriod.Heroes
 
-class HeroProvider {
-    companion object{
-        private val heroList = listOf(
-            HeroData("Aquaman", "asdf"),
-            HeroData("superman", "dasf"),
-            HeroData("superman", "dasf"),
-            HeroData("superman", "dasf"),
-            HeroData("superman", "dasf"),
-            HeroData("superman", "dasf"),
-            HeroData("superman", "dasf"),
-            HeroData("femboy", "asdfasd"),
-            HeroData("femboy", "asdfasd"),
-            HeroData("femboy", "asdfasd"),
-            HeroData("femboy", "asdfasd"),
-            HeroData("furro", "asdfasdf")
-        )
+import com.example.apuntesandriod.Heroes.Repositorios.heroRepository
 
-        fun GetAllHeroes() : List<HeroData> = heroList
+class HeroProvider(private val heroRepository: heroRepository) {
+    suspend fun GetHeroes() : MutableList<HeroData>{
+        return heroRepository.GetHeroes()
     }
 }
