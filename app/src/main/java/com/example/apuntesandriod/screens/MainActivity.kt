@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.apuntesandriod.Heroes.HeroAdapter
 import com.example.apuntesandriod.Heroes.HeroData
 import com.example.apuntesandriod.Heroes.HeroProvider
+import com.example.apuntesandriod.Heroes.Repositorios.HeroApiService
 import com.example.apuntesandriod.Heroes.Repositorios.HeroMockRepository
 import com.example.apuntesandriod.Heroes.Repositorios.HeroSharedDatabase
 import com.example.apuntesandriod.R
@@ -29,36 +30,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.start_screen)
-
-        InitHeroRecylceView()
-    }
-    fun InitHeroRecylceView(){
         heroRecyclerView.layoutManager = LinearLayoutManager(this)
-        /*val tempList = mutableListOf(
-            HeroData("Test hero", "Desc"),
-            HeroData("Test hero", "Desc"),
-            HeroData("Test hero", "Desc"),
-            HeroData("Test hero", "Desc"),
-        )
-        Shared.Heroes = tempList*/
-        //Obtenemos la lista de heroes
-        //Añadimos un nuevo heroe
-        //Actualizamos la lista
-
-        CoroutineScope(Dispatchers.IO).launch {
-            val heroRepository = HeroMockRepository()//nuevo repo
-            //val heroRepository = HeroSharedDatabase()//nuevo repo
-
-            val provider = HeroProvider(heroRepository)
-            val heroList = provider.GetHeroes()
-            val adapter = HeroAdapter(heroList)
-            // heroRecyclerView.adapter = adapter esta mal porque esta tocando un objeto de la UI fuera del hilo principal
-           CoroutineScope(Dispatchers.Main).launch {
-               heroRecyclerView.adapter = adapter
-           }
-
-        }
-        val hero = HeroData("","")
+        heroRecyclerView.adapter = HeroAdapter(HeroApiService())
     }
+
+
 }
 
