@@ -15,7 +15,9 @@ import com.example.apuntesandriod.Heroes.HeroAdapter
 import com.example.apuntesandriod.Heroes.HeroData
 import com.example.apuntesandriod.Heroes.HeroProvider
 import com.example.apuntesandriod.Heroes.Repositorios.HeroMockRepository
+import com.example.apuntesandriod.Heroes.Repositorios.HeroSharedDatabase
 import com.example.apuntesandriod.R
+import com.example.apuntesandriod.Shared
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,9 +34,21 @@ class MainActivity : ComponentActivity() {
     }
     fun InitHeroRecylceView(){
         heroRecyclerView.layoutManager = LinearLayoutManager(this)
+        /*val tempList = mutableListOf(
+            HeroData("Test hero", "Desc"),
+            HeroData("Test hero", "Desc"),
+            HeroData("Test hero", "Desc"),
+            HeroData("Test hero", "Desc"),
+        )
+        Shared.Heroes = tempList*/
+        //Obtenemos la lista de heroes
+        //Añadimos un nuevo heroe
+        //Actualizamos la lista
 
         CoroutineScope(Dispatchers.IO).launch {
-            val heroRepository = HeroMockRepository()
+            val heroRepository = HeroMockRepository()//nuevo repo
+            //val heroRepository = HeroSharedDatabase()//nuevo repo
+
             val provider = HeroProvider(heroRepository)
             val heroList = provider.GetHeroes()
             val adapter = HeroAdapter(heroList)

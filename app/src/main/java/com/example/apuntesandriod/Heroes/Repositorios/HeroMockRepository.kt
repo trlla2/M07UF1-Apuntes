@@ -5,7 +5,7 @@ import com.example.apuntesandriod.Heroes.HeroData
 class HeroMockRepository: heroRepository {
 
     companion object{
-        private val heroList = listOf(
+        private val heroesListHardcoded = mutableListOf(
             HeroData("Aquaman", "asdf"),
             HeroData("superman", "dasf"),
             HeroData("superman", "dasf"),
@@ -22,7 +22,7 @@ class HeroMockRepository: heroRepository {
     }
 
     override suspend fun GetHeroes(): MutableList<HeroData> {
-        TODO("Not yet implemented")
+        return heroesListHardcoded
     }
 
 }
