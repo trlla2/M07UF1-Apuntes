@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
     <color name="newColor">#42A86B</color>
+    <color name="nav_bar">#6D03E6</color>
 </resources>

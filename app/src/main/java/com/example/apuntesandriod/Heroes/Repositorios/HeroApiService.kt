@@ -41,7 +41,7 @@ class HeroApiService: heroRepository {
             @Query("apikey") apiKey: String = API_KEY,
             @Query("hash") hash:String = Hash,
             @Query("offset")offset: Int,
-            @Query("Limit")limit: Int
+            @Query("limit")limit: Int
         ): Response<CharactersResponse>
     }
     override suspend fun GetHeroes(offset: Int, limit: Int): MutableList<HeroData> {
